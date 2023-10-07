@@ -35,8 +35,8 @@ WITH DATOS AS (
     INNER JOIN datawh.Dim_Cliente dimC -- DIM_CLIENTE
         ON orderhead.CustomerID = dimC.CustomerID
     WHERE orderhead.OnlineOrderFlag = 1 -- FILTRAMOS LAS VENTAS ONLINE
-    AND orderhead.OrderDate BETWEEN DATE_FORMAT('2014-04-01', '%Y-%m-%d') AND DATE_FORMAT('2014-03-31', '%Y-%m-%d')
-    LIMIT 178
+    AND orderhead.OrderDate BETWEEN DATE_FORMAT('2014-08-01', '%Y-%m-%d') AND DATE_FORMAT('2014-09-30', '%Y-%m-%d')
+    LIMIT 300
 )
 SELECT 
 SUM(subTotalVenta),

@@ -23,3 +23,14 @@ SELECT
     YEAR(fechaPedido) AS numYear,
     DATE_FORMAT(fechaPedido, '%Y-%m')  AS yearMesNumber
 FROM fechas;
+
+
+
+
+/* 
+
+SELECT 
+DISTINCT DATE(OrderDate) AS fechaPedido
+FROM adw.Sales_SalesOrderHeader 
+WHERE DATE(OrderDate) BETWEEN DATE_FORMAT('2014-01-01', '%Y-%m-%d') AND DATE_FORMAT('2014-12-31', '%Y-%m-%d')
+*/

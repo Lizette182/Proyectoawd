@@ -23,3 +23,9 @@ source ./scripts/dim_tiempo.sql
 --      CREAMOS LA DIMENSION CLIENTE
 -- ********************************************
 source ./scripts/dim_cliente.sql
+
+
+-- ********************************************
+--      CREAMOS LA TABLA DE HECHOS
+-- ********************************************
+source scripts/facVentaOnline.sql
