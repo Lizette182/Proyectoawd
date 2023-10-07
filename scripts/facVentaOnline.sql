@@ -28,15 +28,16 @@ WITH DATOS AS (
     FROM adw.Sales_SalesOrderHeader orderhead
     INNER JOIN adw.Sales_SalesOrderDetail detailorder 
         ON orderhead.SalesOrderID = detailorder.SalesOrderID
-    LEFT JOIN datawh.Dim_Producto dimP -- DIM_PRODUCTO
+    INNER JOIN datawh.Dim_Producto dimP -- DIM_PRODUCTO
         ON detailorder.ProductID = dimP.ProductID
-    LEFT JOIN datawh.Dim_Ubicacion dimU -- DIM_UBICACION
+    INNER JOIN datawh.Dim_Ubicacion dimU -- DIM_UBICACION
         ON orderhead.TerritoryID = dimU.TerritoryID
-    LEFT JOIN datawh.Dim_Cliente dimC -- DIM_CLIENTE
+    INNER JOIN datawh.Dim_Cliente dimC -- DIM_CLIENTE
         ON orderhead.CustomerID = dimC.CustomerID
     WHERE orderhead.OnlineOrderFlag = 1 -- FILTRAMOS LAS VENTAS ONLINE
+    AND orderhead.OrderDate BETWEEN DATE_FORMAT('2014-04-01', '%Y-%m-%d') AND DATE_FORMAT('2014-03-31', '%Y-%m-%d')
+    LIMIT 178
 )
-
 SELECT 
 SUM(subTotalVenta),
 SUM(totalImpuestos),
@@ -51,3 +52,12 @@ ubicacionKey,
 dateKey
 FROM DATOS
 GROUP BY clienteKey,productoKey,ubicacionKey,dateKey;
+
+
+/* SELECT orderhead.OrderDate,count(orderhead.OrderDate)
+FROM adw.Sales_SalesOrderHeader orderhead
+INNER JOIN adw.Sales_SalesOrderDetail detailorder 
+    ON orderhead.SalesOrderID = detailorder.SalesOrderID
+where orderhead.OrderDate BETWEEN DATE_FORMAT('2014-01-01', '%Y-%m-%d') AND DATE_FORMAT('2014-01-31', '%Y-%m-%d')
+GROUP by orderhead.OrderDate
+order by 1; */
